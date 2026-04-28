@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5" />
+<link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
   <div class="card" id="card">
@@ -73,10 +73,12 @@
         <input type="number" id="setLong" min="1" max="60" value="15" />
         <span class="unit">분</span>
       </div>
-      <div class="setting-row">
+      <div class="setting-row cycle-row">
         <label for="setRounds">사이클</label>
-        <input type="number" id="setRounds" min="2" max="12" value="4" />
-        <span class="unit">회마다 긴 휴식</span>
+        <div class="input-stack">
+          <input type="number" id="setRounds" min="2" max="12" value="4" />
+          <span class="unit">회마다 긴 휴식</span>
+        </div>
       </div>
       <div class="setting-row toggle-row">
         <label for="setAuto">자동 시작</label>
@@ -90,6 +92,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>
