@@ -324,6 +324,7 @@ body {
   flex-direction: column;
   gap: 14px;
   animation: slideIn 0.25s ease;
+  z-index: 10;
 }
 
 @keyframes slideIn {
