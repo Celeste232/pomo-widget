@@ -6,8 +6,8 @@
 
 :root {
   --bg: transparent;
-  --card-bg: linear-gradient(135deg, rgba(255, 228, 236, 0.78) 0%, rgba(255, 209, 220, 0.72) 100%);
-  --card-border: rgba(255, 255, 255, 0.85);
+  --card-bg: linear-gradient(135deg, rgba(255, 228, 236, 0.96) 0%, rgba(255, 209, 220, 0.94) 100%);
+  --card-border: rgba(255, 255, 255, 0.9);
   --text-primary: #4A1F2E;
   --text-secondary: #8B5566;
   --text-muted: #C49AA8;
@@ -21,6 +21,9 @@
 
   --accent: var(--pomodoro);
   --accent-soft: var(--pomodoro-soft);
+
+  --ring-color: #95CFC8;
+  --ring-glow: rgba(149, 207, 200, 0.55);
 
   --input-bg: rgba(255, 255, 255, 0.65);
   --input-border: rgba(255, 255, 255, 0.9);
@@ -62,34 +65,17 @@ body {
 }
 
 .card.mode-short {
-  background: linear-gradient(135deg, rgba(214, 235, 247, 0.78) 0%, rgba(186, 220, 240, 0.72) 100%);
+  background: linear-gradient(135deg, rgba(214, 235, 247, 0.96) 0%, rgba(186, 220, 240, 0.94) 100%);
 }
 
 .card.mode-long {
-  background: linear-gradient(135deg, rgba(232, 218, 244, 0.78) 0%, rgba(214, 195, 234, 0.72) 100%);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-bottom: 14px;
-  min-height: 28px;
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.2px;
+  background: linear-gradient(135deg, rgba(232, 218, 244, 0.96) 0%, rgba(214, 195, 234, 0.94) 100%);
 }
 
 .settings-btn {
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 14px;
+  top: 14px;
   background: none;
   border: none;
   padding: 4px;
@@ -99,11 +85,12 @@ body {
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease, color 0.2s ease;
+  z-index: 2;
 }
 
 .settings-btn:hover {
   color: var(--accent);
-  transform: translateY(-50%) rotate(60deg);
+  transform: rotate(60deg);
 }
 
 .modes {
@@ -146,7 +133,7 @@ body {
   width: 100%;
   aspect-ratio: 1;
   max-width: 240px;
-  margin: 0 auto 18px;
+  margin: 6px auto 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,13 +155,32 @@ body {
 
 .ring-progress {
   fill: none;
-  stroke: var(--accent);
+  stroke: var(--ring-color);
   stroke-width: 7;
   stroke-linecap: round;
   stroke-dasharray: 578.05;
   stroke-dashoffset: 0;
-  transition: stroke-dashoffset 0.4s linear, stroke 0.4s ease;
-  filter: drop-shadow(0 1px 2px rgba(232, 90, 122, 0.3));
+  transition: stroke-dashoffset 0.4s linear;
+  filter: drop-shadow(0 0 6px var(--ring-glow));
+}
+
+.card.running .ring-progress {
+  filter: drop-shadow(0 0 12px var(--ring-glow));
+  animation: ringPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { filter: drop-shadow(0 0 8px var(--ring-glow)); }
+  50% { filter: drop-shadow(0 0 18px var(--ring-glow)); }
+}
+
+.card.running .time-text {
+  animation: timePulse 1s ease-in-out infinite;
+}
+
+@keyframes timePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.78; }
 }
 
 .time-display {
@@ -239,8 +245,11 @@ body {
 }
 
 .start-btn.running {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.85);
   color: var(--accent);
+  box-shadow:
+    0 2px 8px rgba(232, 90, 122, 0.18),
+    inset 0 0 0 1.5px var(--accent);
 }
 
 .reset-btn,

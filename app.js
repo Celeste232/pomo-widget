@@ -122,6 +122,7 @@ function renderTime() {
   els.ringProgress.style.strokeDashoffset = String(RING_CIRC * (1 - progress));
   els.startBtn.textContent = state.running ? 'PAUSE' : (state.accumulatedMs > 0 ? 'RESUME' : 'START');
   els.startBtn.classList.toggle('running', state.running);
+  els.card.classList.toggle('running', state.running);
 
   document.title = state.running
     ? `${fmt(remain)} · ${MODE[state.mode].label}`
